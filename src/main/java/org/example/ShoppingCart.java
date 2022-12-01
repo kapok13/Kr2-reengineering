@@ -6,11 +6,13 @@ import java.text.*;
 * Containing items and calculating price.
 */
 public class ShoppingCart {
+    /** Container for added items */
+    private final List<ShoppingCartItem> items = new ArrayList<>();
+
     /**
      * Tests all class methods.
      */
     public static void main(String[] args){
-        // TODO: add tests here
         ShoppingCart cart = new ShoppingCart();
         cart.addItem(new ShoppingCartItem("Apple", 0.99f, 5, ShoppingCartItemType.NEW));
         cart.addItem(new ShoppingCartItem("Banana", 20.00f, 4, ShoppingCartItemType.SECOND_FREE));
@@ -24,12 +26,6 @@ public class ShoppingCart {
      * @throws IllegalArgumentException if some value is wrong
      */
     public void addItem(ShoppingCartItem shoppingCartItem){
-        if (shoppingCartItem.title() == null || shoppingCartItem.title().length() == 0 || shoppingCartItem.title().length() > 32)
-            throw new IllegalArgumentException("Illegal title");
-        if (shoppingCartItem.price() < 0.01)
-            throw new IllegalArgumentException("Illegal price");
-        if (shoppingCartItem.quantity() <= 0)
-            throw new IllegalArgumentException("Illegal quantity");
         items.add(shoppingCartItem);
     }
 
@@ -92,8 +88,7 @@ public class ShoppingCart {
             appendFormatted(sb, header[i], align[i], width[i]);
             sb.append("\n");
         // separator
-        for (int i = 0; i < lineLength; i++)
-            sb.append("-");
+        sb.append("-".repeat(Math.max(0, lineLength)));
             sb.append("\n");
         // lines
         for (String[] line : lines) {
@@ -101,12 +96,9 @@ public class ShoppingCart {
                 appendFormatted(sb, line[i], align[i], width[i]);
                 sb.append("\n");
         }
-        if (lines.size() > 0) {
-            // separator
-            for (int i = 0; i < lineLength; i++)
-                sb.append("-");
-            sb.append("\n");
-        }
+        // separator
+        sb.append("-".repeat(Math.max(0, lineLength)));
+        sb.append("\n");
         // footer
         for (int i = 0; i < footer.length; i++)
             appendFormatted(sb, footer[i], align[i], width[i]);
@@ -152,7 +144,6 @@ public class ShoppingCart {
             case NEW:
                 return 0;
             case REGULAR:
-                discount = 0;
                 break;
             case SECOND_FREE:
                 if (quantity > 1)
@@ -162,14 +153,9 @@ public class ShoppingCart {
                 discount = 70;
                 break;
         }
-        if (discount < 80) {
-            discount += quantity / 10;
+        discount += quantity / 10;
         if (discount > 80)
             discount = 80;
-        }
         return discount;
     }
-
-    /** Container for added items */
-    private List<ShoppingCartItem> items = new ArrayList();
 }
