@@ -19,13 +19,13 @@ class ShoppingCartTest {
 
     @Test
     void testCalculateDiscount() {
-        assertEquals(0, ShoppingCart.calculateDiscount(ShoppingCart.ItemType.NEW, 1));
-        assertEquals(0,   ShoppingCart.calculateDiscount(ShoppingCart.ItemType.REGULAR, 1));
-        assertEquals(70,   ShoppingCart.calculateDiscount(ShoppingCart.ItemType.SALE, 1));
-        assertEquals(0,    ShoppingCart.calculateDiscount(ShoppingCart.ItemType.SECOND_FREE, 1));
-        assertEquals(0,    ShoppingCart.calculateDiscount(ShoppingCart.ItemType.NEW, 11));
-        assertEquals(1,    ShoppingCart.calculateDiscount(ShoppingCart.ItemType.REGULAR, 15));
-        assertEquals(72,    ShoppingCart.calculateDiscount(ShoppingCart.ItemType.SALE, 22));
-        assertEquals(50,    ShoppingCart.calculateDiscount(ShoppingCart.ItemType.SECOND_FREE, 8));
+        assertEquals(0, ShoppingCart.calculateDiscount(ShoppingCartItemType.NEW, 1));
+        assertEquals(0,   ShoppingCart.calculateDiscount(ShoppingCartItemType.REGULAR, 1));
+        assertEquals(70,   ShoppingCart.calculateDiscount(ShoppingCartItemType.SALE, 1));
+        assertEquals(0,    ShoppingCart.calculateDiscount(ShoppingCartItemType.SECOND_FREE, 1));
+        assertEquals(0,    ShoppingCart.calculateDiscount(ShoppingCartItemType.NEW, 11));
+        assertEquals(1,    ShoppingCart.calculateDiscount(ShoppingCartItemType.REGULAR, 15));
+        assertEquals(72,    ShoppingCart.calculateDiscount(ShoppingCartItemType.SALE, 22));
+        assertEquals(50,    ShoppingCart.calculateDiscount(ShoppingCartItemType.SECOND_FREE, 8));
     }
 }
